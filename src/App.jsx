@@ -1,14 +1,33 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import './App.css'
+import MainLayout from "./layouts/MainLayout";
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import Timeline from "./pages/Timeline";
+import Stats from "./pages/Stats";
+import FriendDetails from "./pages/FriendDetails";
+import "./App.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "timeline", element: <Timeline /> },
+      { path: "stats", element: <Stats /> },
+      { path: "friend/:id", element: <FriendDetails /> },
+    ],
+  },
+]);
 
 function App() {
-
-
   return (
     <>
-    <h1 className='text-6xl font-bold bg-red-500 text-white p-10'> This is website</h1>
+      <RouterProvider router={router}/> 
     </>
-  )
+  );
 }
 
-export default App
+export default App;
