@@ -33,7 +33,7 @@ const Navbar = () => {
                   `inline-flex items-center items gap-2 rounded-sm px-4 py-2 text-sm font-semibold transition-all duration-100 leading-none ${isActive?"bg-[#1f5f4a] text-white shadow-sm":"text-[#64748B] hover:bg-slate-100 hover:text-slate-800"}`
                 }
               >
-                <Icon size={16} />
+                <Icon size={16} className="shrink-0 translate-y-px"/>
                 <span>{item.name}</span>
               </NavLink>
             );
