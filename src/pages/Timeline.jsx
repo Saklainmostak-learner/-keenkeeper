@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getTimeline } from "../utils/timeline";
-// import callIcon from "../assets/call.png";
-// import textIcon from "../assets/text.png";
-// import videoIcon from "../assets/video.png";
 import { ChevronDown, LucidePhoneCall, MessageSquareCheckIcon, VideoIcon } from "lucide-react";
 const Timeline = () => {
   const [timeline, setTimeline] = useState([]);
   const [filter, setFilter] = useState("all");
   useEffect(() => {
     const data = getTimeline();
-    console.log(data);
     setTimeline(data);
   }, []);
   const filterData =
@@ -24,15 +20,16 @@ const Timeline = () => {
     });
   };
   const getIcon = (type) => {
-    if (type === "call") return <LucidePhoneCall size={24} className="text-slate-600"/>;
-    if (type === "text") return <MessageSquareCheckIcon size={24} className="text-slate-600" />
-    if (type === "video") return <VideoIcon size={24} className="text-slate-600"/>
+    if (type === "call") {return <LucidePhoneCall size={24} className="text-slate-600"/>};
+    if (type === "text") {return <MessageSquareCheckIcon size={24} className="text-slate-600" />;}
+    if (type === "video") {return <VideoIcon size={24} className="text-slate-600"/>;}
+    return null;
   };
   return (
     <section className="px-4 py-8 md:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-4xl font-bold text-[#1F2937]">Timeline</h2>
-        <div className="relative mt-6 w-full max-w-53">
+        <div className="relative mt-6 w-full max-w-[210px]">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}

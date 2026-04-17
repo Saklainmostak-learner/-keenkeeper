@@ -11,7 +11,7 @@ const FriendsCard = ({ friend }) => {
 
   return (
     <Link to={`/friend/${id}`} className="block h-full">
-      <div className="h-full min-h-63 bg-[#FFFFFF] px-6 py-8 shadow-sm ring-1 ring-slate-200/70 transition duration-200 rounded-sm flex flex-col text-center hover:-translate-y-1 hover:shadow-md">
+      <div className="h-full min-h-64 bg-[#FFFFFF] px-6 py-8 shadow-sm ring-1 ring-slate-200/70 transition duration-200 rounded-sm flex flex-col text-center hover:-translate-y-1 hover:shadow-md">
         <img
           src={picture}
           alt={name}
@@ -23,7 +23,7 @@ const FriendsCard = ({ friend }) => {
         <p className="mt-3 text-sm font-medium text-[#64748B]">
           {days_since_contact}d ago
         </p>
-        <div className="mt-4 flex  flex-wrap items-center min-h-12      justify-center gap-2">
+        <div className="mt-4 flex  flex-wrap items-center min-h-[48px]     justify-center gap-2">
           {tags.map((tag, index) => (
             <span
               key={index}
@@ -33,7 +33,7 @@ const FriendsCard = ({ friend }) => {
             </span>
           ))}
         </div>
-        <div className="mt-3">
+        <div className="mt-auto pt-4">
           <span
             className={`inline-block rounded-full px-4 py-1 text-xs font-semibold ${statusColors[status]}`}
           >

@@ -2,22 +2,32 @@ import React, { useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import CardSummary from "../components/CardSummary";
 import FriendsCard from "../components/FriendsCard";
-
+import { getTimeline } from "../utils/timeline";
 const Home = () => {
   const [friends, setFriends] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("/friends.json")
       .then((res) => res.json())
-      .then((data) => setFriends(data));
+      .then((data) => {setFriends(data);setLoading(false);});
   }, []);
-  const totalFriends=friends.length;
-  const onTrack=friends.filter(
-    (friend)=>friend.status==="on-track").length;
-    const needAttention=friends.filter(
-      (friend)=>friend.status==="overdue"|| friend.status==="almost due").length;
-    
-  
-const interactionsThisMonth=12;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <p className="text-slate-500">Loading...</p>
+      </div>
+    );
+  }
+  const totalFriends = friends.length;
+  const onTrack = friends.filter(
+    (friend) => friend.status === "on-track",
+  ).length;
+  const needAttention = friends.filter(
+    (friend) => friend.status === "overdue" || friend.status === "almost due",
+  ).length;
+
+  const timeline = getTimeline();
+  const interactionsThisMonth = timeline.length;
   return (
     <section className="px-4 py-8 md:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -31,15 +41,15 @@ const interactionsThisMonth=12;
             label="Interactions This Month"
           />
         </div>
-      </div>
       <div className="mt-10">
         <div className="mb-6">
           <h2 className="text-3xl font-bold text-[#1F2937]">Your Friends</h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {friends.map((friend)=>(
-            <FriendsCard key={friend.id} friend={friend}/>
+          {friends.map((friend) => (
+            <FriendsCard key={friend.id} friend={friend} />
           ))}
+      </div>
         </div>
       </div>
     </section>
