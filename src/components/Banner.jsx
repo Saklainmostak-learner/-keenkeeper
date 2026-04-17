@@ -13,7 +13,9 @@ const Banner = () => {
         <Plus size={16} />
         <span>Add a Friend</span>
       </button>
+      
     </div>
+    
   );
 };
 
