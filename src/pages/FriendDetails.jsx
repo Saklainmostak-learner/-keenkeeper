@@ -1,6 +1,15 @@
-import { Archive, BellRing, LucidePhoneCall, MessageSquareMore, Trash2, VideoIcon } from "lucide-react";
+import {
+  Archive,
+  BellRing,
+  LucidePhoneCall,
+  MessageSquareMore,
+  Trash2,
+  VideoIcon,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { addTimeline } from "../utils/timeline";
+import toast from "react-hot-toast";
 
 const statusColor = {
   overdue: "bg-[#EF4444] text-white",
@@ -53,6 +62,18 @@ const FriendDetails = () => {
       </section>
     );
   }
+
+  const handleCheckIn = (type) => {
+    const entry = {
+      id: crypto.randomUUID(),
+      friendId: friend.id,
+      type: type.toLowerCase(),
+      title: `${type} with ${friend.name}`,
+      date: new Date().toISOString(),
+    };
+    addTimeline(entry);
+    toast.success(`${type} logged Successfully`);
+  };
   return (
     <section className="px-4 py-8 md:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
@@ -136,9 +157,9 @@ const FriendDetails = () => {
                 <p className="mt-2 text-[#64748B] text-sm">Next Due</p>
               </div>
             </div>
-              <div className="rounded-xl bg-white px-5 py-5 shadow-sm ring-1 ring-slate-200/70 gap-4">
-                <div className="flex justify-between items-start gap-3">
-                  <div>
+            <div className="rounded-xl bg-white px-5 py-5 shadow-sm ring-1 ring-slate-200/70 gap-4">
+              <div className="flex justify-between items-start gap-3">
+                <div>
                   <h3 className="text-xl font-bold text-[#244D3F]">
                     Relationship Goal
                   </h3>
@@ -148,29 +169,38 @@ const FriendDetails = () => {
                       {friend.goal} days
                     </span>
                   </p>
-                  </div>
-                  <button className="rounded-md bg-[#E9E9E9] px-3 py-2 text-xs font-semibold text-[#1F2937] ring-1 ring-slate-200/70">
-                    Edit
-                  </button>
                 </div>
+                <button className="rounded-md bg-[#E9E9E9] px-3 py-2 text-xs font-semibold text-[#1F2937] ring-1 ring-slate-200/70">
+                  Edit
+                </button>
               </div>
+            </div>
             <div className="rounded-xl bg-white px-5 py-5 shadow-sm ring-1 ring-slate-200/70 ">
               <div>
                 <h3 className="text-xl font-bold text-[#244D3F]">
                   Quick Check-In
                 </h3>
                 <div className="mt-4 grid  gap-3 sm:grid-cols-3 ">
-                  <button className="flex min-h-23 flex-col  items-center justify-center gap-2  rounded-xl bg-[#E9E9E9] text-[#1F2937] ring-1 ring-slate-200/70 transition">
-                  <LucidePhoneCall size={22}/>
-                  <span className="text-base font-medium">Call</span>
+                  <button
+                    onClick={() => handleCheckIn("Call")}
+                    className="flex min-h-23 flex-col  items-center justify-center gap-2  rounded-xl bg-[#E9E9E9] text-[#1F2937] ring-1 ring-slate-200/70 transition"
+                  >
+                    <LucidePhoneCall size={22} />
+                    <span className="text-base font-medium">Call</span>
                   </button>
-                  <button className="flex min-h-23 flex-col items-center justify-center gap-2  rounded-xl bg-[#E9E9E9] text-[#1F2937] ring-1 ring-slate-200/70 transition">
-                  <MessageSquareMore size={22}/>
-                  <span className="text-base font-medium">Text</span>
+                  <button
+                    onClick={() => handleCheckIn("Text")}
+                    className="flex min-h-23 flex-col items-center justify-center gap-2  rounded-xl bg-[#E9E9E9] text-[#1F2937] ring-1 ring-slate-200/70 transition"
+                  >
+                    <MessageSquareMore size={22} />
+                    <span className="text-base font-medium">Text</span>
                   </button>
-                  <button className="flex min-h-23 flex-col items-center justify-center gap-2 rounded-xl bg-[#E9E9E9] text-[#1F2937] ring-1 ring-slate-200/70 transition">
-                  <VideoIcon size={22}/>
-                  <span className="text-base font-medium">Video</span>
+                  <button
+                    onClick={() => handleCheckIn("Video")}
+                    className="flex min-h-23 flex-col items-center justify-center gap-2 rounded-xl bg-[#E9E9E9] text-[#1F2937] ring-1 ring-slate-200/70 transition"
+                  >
+                    <VideoIcon size={22} />
+                    <span className="text-base font-medium">Video</span>
                   </button>
                 </div>
               </div>
