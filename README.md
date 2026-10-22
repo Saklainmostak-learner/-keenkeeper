@@ -1,3 +1,7 @@
+## Project Preview
+
+![Homepage Screenshot](./homepageK.png)
+
 
 # KeenKeeper — Relationship Tracker
 
