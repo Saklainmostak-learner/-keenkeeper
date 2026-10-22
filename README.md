@@ -1,11 +1,10 @@
-## Project Preview
-
-![Homepage Screenshot](./homepageK.png)
-
-
 # KeenKeeper — Relationship Tracker
 
 KeenKeeper is a responsive relationship-tracking web application built with React. It helps users organize contacts, record interactions and review relationship activity.
+
+## Project Preview
+
+![Homepage Screenshot](./homepageK.png)
 
 ## Live Website
 
